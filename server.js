@@ -8,6 +8,7 @@ const db = require('./db/db')
 // const router = require('./routes/transactions')
   
 const {readdirSync}= require("fs")
+const router = require('./routes/transactions')
  
 const app = express()
 
@@ -19,12 +20,9 @@ app.use(cors())
  
 
 //routes
-readdirSync('./routes').map((route)=>app.use('/api/v1',require('./routes/'+route)))
 
+app.use('/api/v1',router)
 
-app.get("/",(req,res)=>{
-    res.send("Hello world")
-})
 
 const server = ()=>{
     db()
